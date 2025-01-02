@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     public function homepage(){
-        return view("homepage");
+        return view("dashboard");
     }
 
     public function listFlat(){
@@ -53,7 +53,7 @@ class UserController extends Controller
             DB::table('rooms')->insert($roomData);
         }
 
-        return redirect()->route('homepage')->with('success', 'Rooms added successfully!');
+        return redirect()->route('dashboard')->with('success', 'Rooms added successfully!');
     }
 
 
