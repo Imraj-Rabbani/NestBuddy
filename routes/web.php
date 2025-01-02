@@ -16,10 +16,13 @@ Route::controller(UserController::class)->group(function(){
     Route::get('/', 'homepage')->name('homepage');
     Route::get('/list-flat', 'listFlat')->name('listflat');
     Route::post('/save-flat', 'saveFlat')->name('saveFlat');
+    Route::get('/listed-room', 'listedRoom')->name('listedroom');
     Route::get('/create-shop', 'createShop')->name('createshop');
     Route::post('/save-shop', 'saveShop')->name('saveshopinfo');
-    Route::get('/listed-room', 'listedRoom')->name('listedroom');
     Route::post('/place-bid/{flat_id}/{room_number}', 'placeBid')->name('placebid');
+    Route::get('/shops', 'shops')->name('shops');
+
+
 });
 
 

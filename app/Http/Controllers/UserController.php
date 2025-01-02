@@ -33,6 +33,10 @@ class UserController extends Controller
             'owner_id' => $user_id,
         ]);
 
+        DB::table('users')
+        ->where('id', $user_id) 
+        ->update(['H_flag' => 1]); 
+
         foreach ($request->room_number as $index => $roomNumber) {
             $roomData = [
                 'room_number' => $roomNumber,
@@ -66,6 +70,13 @@ class UserController extends Controller
         'shop_name' => $request->shop_name,
         'S_user_id' => $user_id,
     ]);
+
+    DB::table('users')
+        ->where('id', $user_id) 
+        ->update([
+            'S_flag' => 1,
+            'shop_name' => $request->shop_name,
+        ]);
 
     // Insert into menus table
 
@@ -112,5 +123,12 @@ class UserController extends Controller
             'bid_amount' => $request->bid_price,
         ]);
 }
+
+    public function shops(){
+        $shops = DB::table('shops')->get();
+        $menus = DB::table('menus')->get();
+        // dd($shops,$menus);
+        return view('user.shops', compact(['shops','menus']));
+    }
 
 }

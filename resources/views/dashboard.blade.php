@@ -9,13 +9,13 @@
         <div class="border-4 border-blue-500 rounded-lg p-6 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out transform hover:-translate-y-1">
             <h3 class="text-xl font-bold mb-4">Find Your Perfect Flat</h3>
             <p>Browse through thousands of flats for rent, filter by location, budget, and amenities.</p>
-            <a href="" class="inline-block bg-blue-500 text-white hover:bg-white hover:text-blue-500 rounded-full px-4 py-2 mt-4">Find Flats</a>
+            <a href="{{route('listedroom')}}" class="inline-block bg-blue-500 text-white hover:bg-white hover:text-blue-500 rounded-full px-4 py-2 mt-4">Find Flats</a>
         </div>
 
         <div class="border-4 border-blue-500 rounded-lg p-6 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out transform hover:-translate-y-1">
             <h3 class="text-xl font-bold mb-4">Order Delicious Food Online</h3>
             <p>Discover a wide variety of restaurants and cuisines, and have your favorite dishes delivered to your doorstep.</p>
-            <a href="" class="inline-block bg-blue-500 text-white hover:bg-white hover:text-blue-500 rounded-full px-4 py-2 mt-4">Order Food</a>
+            <a href="{{route('shops')}}" class="inline-block bg-blue-500 text-white hover:bg-white hover:text-blue-500 rounded-full px-4 py-2 mt-4">Order Food</a>
         </div>
 
         <div class="border-4 border-green-500 rounded-lg p-6 hover:bg-green-500 hover:text-white transition duration-300 ease-in-out transform hover:-translate-y-1">
