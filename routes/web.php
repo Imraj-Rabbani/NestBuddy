@@ -31,6 +31,14 @@ Route::controller(UserController::class)->group(function(){
     Route::post('/update-price/{shop_id}/{item_name}', 'updatePrice')->name('updateprice');
     Route::delete('/delete-item/{shop_id}/{item_name}', 'deleteItem')->name('deleteitem');
 
+    Route::get('/room-details/{room_number}/{flat_id}', 'roomDetails')->name('roomdetails');
+
+    Route::get('/cart','showCart')->name('showcart');
+    Route::post('/cart','addToCart')->name('addtocart');
+    Route::delete('/delete-cart-item/{id}','deleteCart')->name('deletecart');
+
+    // Route::post('/order','order')->name('order');
+
 });
 
 

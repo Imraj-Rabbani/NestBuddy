@@ -16,15 +16,19 @@
             <div class="p-4">
                 <h2 class="text-lg font-semibold mb-2">Room Available for Rent</h2>
                 <p class="text-gray-700">Rent: {{ $room->rent  }} BDT</p>
-                <p class="text-gray-700">Description {{ $room->description }}</p>
-                <form action="{{ route('placebid', [$room->flat_id,$room->room_number]) }}" method="POST">
+                <p class="text-gray-700 mb-4">Description {{ $room->description }}</p>
+                {{-- <form action="{{ route('placebid', [$room->flat_id,$room->room_number]) }}" method="POST">
                     @csrf
                     <div class="flex items-center mt-2">
                         <label for="bid_price" class="mr-2">Bid Price:</label>
                         <input type="number" id="bid_price" name="bid_price" class="border border-gray-300 rounded-md p-2" min="1" step="0.01" required>
                     </div>
                     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">Place Bid</button>
-                </form>
+                </form> --}}
+                <a href="{{ route('roomdetails', ['flat_id' => $room->flat_id, 'room_number' => $room->room_number]) }}" 
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                     Show Details
+                 </a>
             </div>
         </div>
         @endforeach

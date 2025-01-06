@@ -32,28 +32,14 @@ function removeRow2(button) {
 }
 
 
-// const durationInput = document.getElementById('subscription_duration');
-// const subscriptionTable = document.getElementById('subscription-table');
+function incrementQuantity(shopId, itemName) {
+    var input = document.getElementById('quantity_' + shopId + '_' + itemName);
+    input.value = parseInt(input.value) + 1;
+}
 
-// durationInput.addEventListener('input', () => {
-//     const duration = parseInt(durationInput.value);
-
-//     if (duration > 0) {
-//         subscriptionTable.classList.remove('hidden');
-//         const subscriptionRows = document.getElementById('subscription-rows');
-//         subscriptionRows.innerHTML = ''; // Clear existing rows
-
-//         for (let i = 1; i <= duration; i++) {
-//             const newRow = document.createElement('tr');
-//             newRow.innerHTML = `
-//                 <td class="px-6 py-4">${i}</td>
-//                 <td class="px-6 py-4 whitespace-nowrap">
-//                     <input type="text" name="sub_item_name[]" class="border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-//                 </td>
-//             `;
-//             subscriptionRows.appendChild(newRow);
-//         }
-//     } else {
-//         subscriptionTable.classList.add('hidden');
-//     }
-// });
+function decrementQuantity(shopId, itemName) {
+    var input = document.getElementById('quantity_' + shopId + '_' + itemName);
+    if (parseInt(input.value) > 0) {
+        input.value = parseInt(input.value) - 1;
+    }
+}
