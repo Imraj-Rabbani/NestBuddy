@@ -18,7 +18,6 @@ return new class extends Migration
             $table->primary(["shop_id", 'item_name']);
             $table->integer('price');
             $table->integer('amount_sold');
-            $table->timestamps();
         });
     }
 

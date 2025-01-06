@@ -19,7 +19,6 @@ return new class extends Migration
             $table->enum('status', ['available', 'rented'])->default('available');
             $table->primary(['room_number', 'flat_id']);
             $table->foreign('flat_id')->references('flat_id')->on('flats')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 

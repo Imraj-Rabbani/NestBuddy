@@ -12,7 +12,7 @@
         @foreach ($rooms as $room)
         
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <img src="{{ asset('photos/test.jpg') }}" alt="Flat Image" class="w-full h-48 object-cover"> 
+            <img src="{{$room->photo}}" alt="Flat Image" class="w-full h-48 object-cover"> 
             <div class="p-4">
                 <h2 class="text-lg font-semibold mb-2">Room Available for Rent</h2>
                 <p class="text-gray-700">Rent: {{ $room->rent  }} BDT</p>

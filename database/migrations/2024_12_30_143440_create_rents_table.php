@@ -21,7 +21,6 @@ return new class extends Migration
             $table->foreign("R_room_number")->references('room_number')->on('rooms')->onDelete('cascade');
             $table->tinyInteger('rating')->nullable();
             $table->string('comments')->nullable();
-            $table->timestamps();
         });
     }
 

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('bid_amount');
             $table->timestamp('bid_placed_at')->useCurrent(); 
-            $table->string('status');
+            $table->string('status')->nullable();
         });
     }
 

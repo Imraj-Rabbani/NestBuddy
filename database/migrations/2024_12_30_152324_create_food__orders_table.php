@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('food__orders', function (Blueprint $table) {
             $table->id();
             $table->integer("delivery_cost");
-            $table->smallInteger("rating");
-            $table->string('status');
+            $table->smallInteger("rating")->nullable();
+            $table->string('status')->nullable();
             $table->date('order_date');
             $table->unsignedBigInteger('B_user_id');
             $table->foreign("B_user_id")->references('id')->on('users')->onDelete('cascade');

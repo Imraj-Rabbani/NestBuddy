@@ -6,7 +6,7 @@
 @section('content')
     <div class="container mx-auto p-4">
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <img src="{{ asset('photos/test.jpg') }}" alt="Flat Image" class="w-full h-[600px]">
+            <img src="{{$room->photo}}" alt="Flat Image" class="w-full h-[600px]">
             <div class="p-6">
                 <h2 class="text-2xl font-semibold mb-4">Room Details</h2>
                 <p class="text-gray-700 mb-2">Flat Number: {{ $room->flat_number }}</p>
