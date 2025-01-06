@@ -35,7 +35,7 @@
                                         {{ Auth::user()->name }} 
                                     </span>
                                 </li>
-                                <li><a href="{{ route('dashboard') }}"
+                                <li><a href="{{ route('userprofile') }}"
                                         class="text-gray-900 hover:bg-gray-50 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
                                 </li>
                                 <li><a href="{{ route('logout') }}"

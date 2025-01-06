@@ -22,6 +22,14 @@ Route::controller(UserController::class)->group(function(){
     Route::post('/place-bid/{flat_id}/{room_number}', 'placeBid')->name('placebid');
     Route::get('/shops', 'shops')->name('shops');
 
+    Route::get('/user-profile', 'userProfile')->name('userprofile');
+    Route::post('/update-user-profile', 'updateUserProfile')->name('updateuserprofile');
+
+    Route::post('/update-rent/{flat_id}/{room_number}', 'updateRent')->name('updaterent');
+    Route::delete('/delete-room/{flat_id}/{room_number}', 'deleteRoom')->name('deleteroom');
+
+    Route::post('/update-price/{shop_id}/{item_name}', 'updatePrice')->name('updateprice');
+    Route::delete('/delete-item/{shop_id}/{item_name}', 'deleteItem')->name('deleteitem');
 
 });
 

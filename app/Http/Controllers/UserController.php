@@ -131,4 +131,84 @@ class UserController extends Controller
         return view('user.shops', compact(['shops','menus']));
     }
 
+
+    public function userProfile(){
+        $user_id = Auth::id(); 
+
+
+        $user = DB::table('users')
+        ->select('*')
+        ->where('id', $user_id)
+        ->get();
+        $user = $user[0];
+
+
+        $properties = DB::table('flats')
+        ->join('rooms', 'flats.flat_id', '=', 'rooms.flat_id')
+        ->select('flats.flat_id','flats.flat_number', 'rooms.room_number', 'rooms.rent', 'rooms.status')
+        ->where('flats.owner_id', $user->id) // Assuming flats table has a user_id column
+        ->get();
+
+        // dd($properties);
+
+        $items = DB::table('shops')
+            ->join('menus', 'shops.id',"=",'menus.shop_id')
+            ->select('shops.shop_name','menus.*')
+            ->where('S_user_id', $user->id) 
+            ->get();
+
+        // dd($items);
+
+        return view('user.profile', compact(['user','properties','items']));
+    }
+
+    public function updateUserProfile(Request $request){
+        $user_id = Auth::id();
+
+        DB::table('users')
+        ->where('id', $user_id)
+        ->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'age' => $request->age,
+            'occupation' => $request->occupation,
+            'B_flag' => isset($request->B_flag) ? 1 : 0,
+            'H_flag' => isset($request->H_flag) ? 1 : 0,
+            'S_flag' => isset($request->S_flag) ? 1 : 0,
+        ]);
+    }
+
+    public function updateRent(Request $request, $flat_id, $room_number){
+        DB::table('rooms')
+        ->where('flat_id', $flat_id)
+        ->where('room_number', $room_number)
+        ->update([
+            'rent' => $request->rent,
+        ]);
+    }
+
+
+    public function deleteRoom(Request $request, $flat_id, $room_number){
+        DB::table('rooms')
+        ->where('flat_id', $flat_id)
+        ->where('room_number', $room_number)
+        ->delete();
+    }
+
+
+    public function updatePrice(Request $request, $shop_id, $item_name){
+        DB::table('menus')
+            ->where('shop_id', $shop_id)
+            ->where('item_name',$item_name) 
+            ->update([
+                'price' => $request->price,
+            ]);
+    }
+
+    public function deleteItem(Request $request, $shop_id, $item_name){
+        DB::table('menus')
+            ->where('shop_id', $shop_id)
+            ->where('item_name',$item_name) 
+            ->delete();
+    }
 }
