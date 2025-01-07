@@ -26,9 +26,7 @@ class UserController extends Controller
 
     public function saveFlat(Request $request)
     {
-
         $user_id = Auth::id();
-
         // dd($user_id);
         $flatId = DB::table('flats')->insertGetId([
             'flat_number' => $request->flat_number,
@@ -51,14 +49,13 @@ class UserController extends Controller
                 'description' => $request->description[$index],
             ];
 
-            
-            if($request->hasFile('photos.' . $index)){
+            if ($request->hasFile('photos.' . $index)) {
                 $file = $request->file('photos.' . $index);
                 $extension = $file->getClientOriginalName();
-                $fileName = time().".".$extension;
+                $fileName = time() . "." . $extension;
                 $path = 'uploads/';
                 $file->move($path, $fileName);
-                $roomData['photo'] = $path.$fileName;
+                $roomData['photo'] = $path . $fileName;
             }
 
             DB::table('rooms')->insert($roomData);
@@ -259,6 +256,8 @@ class UserController extends Controller
             'price' => $request->price,
             'quantity' => $request->quantity
         ]);
+
+        return redirect()->route('shops')->with('success', 'Added to Cart successfully!');
     }
 
     public function showCart()
@@ -267,20 +266,87 @@ class UserController extends Controller
 
         $cart_items = DB::table('carts')
             ->select("*")
-            ->where('user_id', $user_id) 
-            ->get(); 
+            ->where('user_id', $user_id)
+            ->get();
 
-            $total = $cart_items->sum(function ($item) {
-                return $item->price * $item->quantity;
-            });
-        
+        $total = $cart_items->sum(function ($item) {
+            return $item->price * $item->quantity;
+        });
+
 
         return view('user.cart', compact(['cart_items', 'total']));
     }
 
-    public function deleteCart(Request $request, $id){
-        DB::table('carts')->where('id', $id)->delete(); 
+    public function deleteCart($id)
+    {
+        DB::table('carts')->where('id', $id)->delete();
+
+        return redirect()->route('showcart')->with('success', 'Removed From Cart successfully!');
     }
 
-   
+    public function order(Request $request)
+    {
+        $user_id = Auth::id();
+
+        $order_id = DB::table('food__orders')->insertGetId([
+            'B_user_id' => $user_id,
+            'status' => "Delivering"
+        ]);
+
+        DB::table('items_infos')->insert([
+            'order_id' => $order_id,
+            'items' => $request->item_name,
+            'quantity' => $request->quantity,
+            'price' => $request->price
+        ]);
+
+        DB::table('belongs_tos')->insert([
+            'order_id' => $order_id,
+            'item_name' => $request->item_name,
+            'shop_id' => $request->shop_id
+        ]);
+
+        DB::table('carts')->where('id', $request->id)->delete();
+
+        return redirect()->route('showcart')->with('success', 'Ordered successfully!');
+    }
+
+    public function myOrders()
+    {
+        $user_id = Auth::id();
+
+        $orders = DB::table('food__orders')
+            ->join('items_infos', 'food__orders.id', '=', 'items_infos.order_id')
+            ->where('food__orders.B_user_id', $user_id)
+            ->select('food__orders.*', 'items_infos.*')
+            ->get();
+
+        return view('user.myOrders', compact('orders'));
+    }
+
+    public function showOrders()
+    {
+        $user_id = Auth::id();
+
+        $orders = DB::table('belongs_tos')
+            ->join('food__orders', 'belongs_tos.order_id', '=', 'food__orders.id')
+            ->join('shops', 'belongs_tos.shop_id', '=', 'shops.id')
+            ->where('shops.S_user_id', $user_id)
+            ->select('belongs_tos.*', 'food__orders.status')
+            ->get();
+
+        return view('user.showOrder', compact('orders'));
+    }
+
+    public function orderUpdate($id)
+    {
+        DB::table('food__orders')
+            ->where('id', $id)
+            ->update(['status' => 'Delivered']);
+
+            return redirect()->route('showorders');
+        
+    }
+
+
 }

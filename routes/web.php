@@ -37,8 +37,12 @@ Route::controller(UserController::class)->group(function(){
     Route::post('/cart','addToCart')->name('addtocart');
     Route::delete('/delete-cart-item/{id}','deleteCart')->name('deletecart');
 
-    // Route::post('/order','order')->name('order');
+    Route::post('/order','order')->name('order');
 
+    Route::get('/my-orders','myOrders')->name('myorders');
+    Route::get('/show-orders','showOrders')->name('showorders');
+
+    Route::post('/order-update/{id}','orderUpdate')->name('orderupdate');
 });
 
 

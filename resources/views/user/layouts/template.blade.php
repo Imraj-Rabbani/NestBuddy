@@ -32,7 +32,9 @@
                             <ul class="flex space-x-8">
                                 <li>
                                     <span class="text-gray-900 hover:bg-gray-50 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
+                                        <a href="{{route('showorders')}}">
                                         {{ Auth::user()->name }} 
+                                    </a>
                                     </span>
                                 </li>
                                 <li><a href="{{ route('userprofile') }}"

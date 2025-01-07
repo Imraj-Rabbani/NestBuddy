@@ -4,6 +4,11 @@
 @endsection
 
 @section('content')
+@if (session('success'))
+    <div class="bg-green-100 border text-center border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+        <span class="block sm:inline">{{ session('success') }}</span>
+    </div>
+@endif
     <div class="container mx-auto p-4">
         <h1 class="text-2xl font-bold mb-4">Shops and Menus</h1>
 
@@ -25,7 +30,7 @@
                                             onclick="decrementQuantity('{{ $shop->id }}', '{{ $menu->item_name }}')">-</button>
                                         <input type="text" class="w-[40px] border-none"
                                             id="quantity_{{ $shop->id }}_{{ $menu->item_name }}"
-                                            name="quantity" value="0"
+                                            name="quantity" value="1"
                                             min="0" class="w-10 text-center mx-2 border border-gray-300 rounded-sm">
                                         <button type="button" class="text-sm bg-gray-200 rounded-sm px-2 py-1"
                                             onclick="incrementQuantity('{{ $shop->id }}', '{{ $menu->item_name }}')">+</button>
@@ -46,9 +51,14 @@
             </div>
         @endforeach
 
-        <div class="mt-4">
+        <div class="my-4">
             <a href="{{route('showcart')}}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">View
                 Cart</a>
+        </div>
+        <div class="my-4">
+            <a href="{{route('myorders')}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-4 py-2 px-4 rounded">
+                Your orders
+            </a>
         </div>
     </div>
 @endsection

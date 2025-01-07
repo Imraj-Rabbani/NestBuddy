@@ -1,6 +1,6 @@
 @extends('user.layouts.template')
 @section('title')
-    List Your Flat
+    Room Details
 @endsection
 
 @section('content')

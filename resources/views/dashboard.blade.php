@@ -4,6 +4,11 @@
 @endsection
 
 @section('content')
+@if (session('success'))
+    <div class="bg-green-100 border text-center border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+        <span class="block sm:inline">{{ session('success') }}</span>
+    </div>
+@endif
 <div class="container mx-auto px-4 py-16">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div class="border-4 border-blue-500 rounded-lg p-6 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out transform hover:-translate-y-1">
